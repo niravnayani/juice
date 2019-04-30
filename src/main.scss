@@ -1,0 +1,862 @@
+//Colors
+$primary-color: #f15b4c;
+$white-color: #ffff;
+$black-color: #000;
+$dark-color: #9b9b9b;
+$light-color: #f1f1f1;
+$divider-color: #ddd;
+
+.primary-color {
+	color: $primary-color;
+}
+
+.white-color {
+	color: $white-color;
+}
+
+.black-color {
+	color: $black-color;
+}
+
+.dark-color {
+	color: $dark-color;
+}
+
+.white-bg {
+    background: $white-color;
+}
+
+.black-bg {
+    background: $black-color;
+}
+
+//Breakpoints
+$xsmall: 480px;
+$small: 768px;
+$medium: 992px;
+$large: 1200px;
+
+//Mixins
+@mixin xsmall {
+	@media only screen and (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin small {
+	@media only screen and (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin medium {
+	@media only screen and (max-width: 992px) {
+		@content;
+	}
+}
+@function calculateRem($size) {
+	$remSize: $size / 16px;
+	@return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculateRem($size);
+}
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+	@if $inset {
+		-webkit-box-shadow: inset $top $left $blur $color;
+		-moz-box-shadow: inset $top $left $blur $color;
+		box-shadow: inset $top $left $blur $color;
+	} @else {
+		-webkit-box-shadow: $top $left $blur $color;
+		-moz-box-shadow: $top $left $blur $color;
+		box-shadow: $top $left $blur $color;
+	}
+}
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-ms-transition: $args;
+	-o-transition: $args;
+	transition: $args;
+}
+@mixin flex($values) {
+	-webkit-box-flex: $values;
+	-moz-box-flex: $values;
+	-webkit-flex: $values;
+	-ms-flex: $values;
+	flex: $values;
+}
+@mixin flex-direction($direction) {
+	-webkit-flex-direction: $direction;
+	-moz-flex-direction: $direction;
+	-ms-flex-direction: $direction;
+	flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+	-webkit-flex-wrap: $wrap;
+	-moz-flex-wrap: $wrap;
+	-ms-flex-wrap: $wrap;
+	flex-wrap: $wrap;
+}
+@mixin justify-content($justify) {
+	-webkit-justify-content: $justify;
+	-moz-justify-content: $justify;
+	-ms-justify-content: $justify;
+	justify-content: $justify;
+	-ms-flex-pack: $justify;
+}
+@mixin align-content($align) {
+	-webkit-align-content: $align;
+	-moz-align-content: $align;
+	-ms-align-content: $align;
+	align-content: $align;
+}
+@mixin align-items($align) {
+	-webkit-align-items: $align;
+	-moz-align-items: $align;
+	-ms-align-items: $align;
+	align-items: $align;
+}
+@mixin align-self($align) {
+	-webkit-align-self: $align;
+	-moz-align-self: $align;
+	-ms-align-self: $align;
+	align-self: $align;
+}
+@mixin vertical-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+@mixin vertical-center-left {
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	-ms-transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+@mixin vertical-center-right {
+	position: absolute;
+	top: 50%;
+	right: 0%;
+	-ms-transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body,
+html {
+	font-family: "PT Sans", sans-serif;
+	background-color: $white-color;
+
+	* {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.clearfix {
+	@include clearfix();
+}
+
+//Typography
+.bold {
+	font-weight: bold;
+}
+.uppercase {
+	text-transform: uppercase;
+}
+.capitalize {
+	text-transform: capitalize;
+}
+h1 {
+	@include font-size(40px);
+
+	@include medium {
+		@include font-size(35px);
+	}
+
+	@include small {
+		@include font-size(30px);
+	}
+
+	@include xsmall {
+		@include font-size(25px);
+	}
+}
+
+h2 {
+	@include font-size(34px);
+
+	@include medium {
+		@include font-size(30px);
+	}
+
+	@include small {
+		@include font-size(26px);
+	}
+
+	@include xsmall {
+		@include font-size(22px);
+	}
+}
+
+.sm {
+	@include font-size(14px);
+}
+
+//Z-index
+.z1 {
+	z-index: 10;
+}
+.z2 {
+	z-index: 20;
+}
+.z3 {
+	z-index: 30;
+}
+.z4 {
+	z-index: 40;
+}
+
+//Widths
+.width100 {
+	width: 100%;
+}
+.width50 {
+	width: 50%;
+}
+.width40 {
+	width: 50%;
+}
+.width33 {
+	width: 33.333%;
+}
+.m-width100 {
+	max-width: 1000px;
+}
+.m-width50 {
+	max-width: 500px;
+}
+.m-width40 {
+	max-width: 400px;
+}
+.m-width30 {
+	max-width: 300px;
+}
+.small-up-width50 {
+	@include small {
+		width: 100%;
+	}
+	width: 50%;
+}
+.small-up-width33 {
+	@include small {
+		width: 100%;
+	}
+	width: 33.333%;
+}
+.medium-up-width25 {
+	@include medium {
+		width: 50%;
+	}
+	width: 25%;
+}
+
+//Spacing
+.margin-v1 {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+.margin-vt1 {
+	margin-top: 1em;
+}
+.margin-vb1 {
+	margin-bottom: 1em;
+}
+.margin-vt075 {
+	margin-top: 0.75em;
+}
+.margin-vb075 {
+	margin-bottom: 0.75em;
+}
+.margin-h1 {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.mobile-h1-margin {
+    @include xsmall {
+        margin-left: 1em;
+	    argin-right: 1em;
+    }
+}
+.mobile-margin-0 {
+    @include xsmall {
+        margin: 0;
+    }
+}
+.margin-v2 {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.margin-vt2 {
+	margin-top: 2em;
+}
+.margin-vb2 {
+	margin-bottom: 2em;
+}
+.margin-vt3 {
+	margin-top: 3em;
+}
+.margin-vb3 {
+	margin-bottom: 3em;
+}
+.margin-vt5 {
+	margin-top: 5em;
+}
+.margin-vb5 {
+	margin-bottom: 5em;
+}
+.margin-h2 {
+	margin-left: 2em;
+	margin-right: 2em;
+}
+.padding-l4 {
+	padding-left: 4em;
+}
+.padding4 {
+	padding: 4em;
+}
+.padding3 {
+	padding: 3em;
+}
+.padding2 {
+	padding: 2em;
+}
+.padding1 {
+	padding: 1em;
+}
+.padding075 {
+	padding: 0.75em;
+}
+.mobile-padding-0 {
+    @include xsmall {
+        padding: 0;
+    }
+}
+.mobile-v-padding-0 {
+    @include xsmall {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+.mobile-h-padding-0 {
+    @include xsmall {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+//align
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+
+//Display
+.block {
+	display: block;
+}
+.inline-block {
+	display: inline-block;
+}
+
+.visually-hidden {
+	visibility: hidden;
+}
+.hide {
+    display: none;
+}
+.mobile-hide {
+    @include small {
+        display: none;
+    }
+}
+.mobile-show {
+    display: none !important;
+
+    @include small {
+        display: inline-block !important;
+    }
+}
+
+//Position
+.relative {
+	position: relative;
+}
+.absolute {
+	position: absolute;
+}
+
+//Container
+.container {
+	max-width: 1170px;
+}
+
+//Buttons
+.btn-primary {
+	display: inline-block;
+	color: $primary-color;
+	background: transparent;
+	border: 1px solid $primary-color;
+	padding: 10px 25px;
+	font-weight: bold;
+	@include font-size(14px);
+	text-transform: uppercase;
+	text-decoration: none;
+	@include transition(all 0.3s ease);
+
+	&:hover {
+		color: $white-color;
+		background: $primary-color;
+	}
+}
+
+//Base
+a {
+	text-decoration: none;
+    color: $black-color;
+    display: inline-block;
+	@include transition(color 0.3s ease);
+
+	&:hover {
+		color: $primary-color;
+	}
+
+	.inverse {
+		color: $primary-color;
+
+		&:hover {
+			color: $black-color;
+		}
+	}
+}
+.decoration {
+    color: $white-color;
+    border-bottom: 1px solid $white-color;
+}
+hr.primary {
+	width: 30px;
+	height: 3px;
+	background-color: $primary-color;
+	border: none;
+}
+.img {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.no-margin {
+	margin: 0;
+}
+
+.margin-auto {
+	margin: 0 auto;
+}
+
+.wrapper {
+	max-width: 1440px;
+	@include box-shadow(0, 0, 6px, rgba(0, 0, 0, 0.3));
+}
+
+//Header
+header {
+    @include flexbox;
+    @include align-items(center);
+    @include justify-content(space-between);
+
+    .mobile-nav {
+        display: none;
+
+        img {
+            max-width: 160px;
+        }
+
+        @include small {
+            display: block;
+        }
+
+        .flex-container {
+            @include flexbox;
+            @include align-items(center);
+            @include justify-content(space-between);
+
+            .toggle-menu {
+                height: 30px;
+                width: 30px;
+                
+                span {
+                    height: 2px;
+                    width: 30px;
+                    background: $primary-color;
+                    display: inline-block;
+                    position: relative;
+
+                    &:first-of-type {                        
+                        top: -11px;
+                    }
+                    &:nth-child(2) {
+                        top: -17px;
+                    }
+                    &:last-of-type {
+                        top: -23px;
+                    }
+                }
+            }
+        }
+    }
+
+    .logo-container {
+        @include flexbox;
+
+        > div {
+            @include flexbox;
+
+            > div, 
+            > div > a,
+            > a {
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+            }
+        }
+
+        @include small {
+            display: none;
+            position: absolute;
+            top: 58px;
+            width: 100%;
+            background: $light-color;
+            max-height: 300px;
+            overflow: scroll;
+
+            .logo {
+                display: none;
+            }
+
+            > div {
+                display: block;
+    
+                > div, 
+                > div > a,
+                > a {
+                    display: block;
+                }
+            }
+        }
+
+        @include medium {
+            img {
+                max-width: 160px;
+            }
+        }
+
+    }
+}
+
+.megamenu-container {
+    display: none;
+    left: 0;
+    right: 0;
+    border-top: 1px solid $divider-color;
+
+    @include small {
+        img {
+            display: none;
+        }
+        padding-left: 1em;
+        border: none;
+        position: relative;
+        background: $light-color;
+    }
+
+    .megamenu {
+        @include flexbox;
+        @include justify-content(space-between);
+
+        @include small {
+            display: block;
+        }
+
+        .dropdown-child {
+            @include flexbox;
+            @include flex-direction(column);
+
+            @include small {
+                display: none;
+                padding-left: 1em;
+            }
+
+            a {
+                margin-bottom: 0.5em;
+                @include font-size(12px);
+            }
+        }
+    }
+}
+
+//Hero
+.hero {
+	background-image: url("./images/hero.jpg");
+	background-size: cover;
+	background-position: right center;
+	min-height: 500px;
+	@include flexbox();
+
+	@include medium {
+		min-height: 400px;
+		color: $white-color;
+
+		.tint:after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: transparentize($color: $black-color, $amount: 0.3);
+			transition: all 0.3s linear;
+		}
+	}
+
+	@include small {
+		min-height: 300px;
+	}
+
+	@include xsmall {
+		min-height: 250px;
+	}
+	.hero-info {
+		padding-left: 4em;
+
+		@include flexbox();
+		@include justify-content(center);
+		@include align-items(flex-start);
+		@include flex-direction(column);
+
+		@include small {
+			padding: 1em;
+			text-align: center;
+			@include align-items(center);
+		}
+	}
+}
+
+//Steps
+.steps {
+	@include flexbox();
+	@include flex-wrap(wrap);
+
+	.step {
+		p {
+			font-size: 170px;
+		}
+
+		div {
+			@include vertical-center-left;
+
+			span:first-of-type:after {
+				content: " ";
+				border-bottom: 1px solid $black-color;
+				display: table-cell;
+				width: 200px;
+			}
+		}
+	}
+}
+
+//Slider
+.dots {
+	bottom: 15px;
+	width: 100%;
+
+	.dot {
+		cursor: pointer;
+		height: 15px;
+		width: 15px;
+		margin: 0 2px;
+		background-color: $dark-color;
+		border-radius: 50%;
+		display: inline-block;
+		@include transition(background-color 0.6s ease);
+
+		&.active,
+		&.dot:hover {
+			background-color: $primary-color;
+		}
+	}
+}
+
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+	from {
+		opacity: 0.4;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	from {
+		opacity: 0.4;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+//Info Block
+.info-block {
+	background-position: center;
+	background-size: cover;
+	min-height: 600px;
+	@include flexbox();
+	@include justify-content(center);
+	@include align-items(center);
+	@include flex-direction(column);
+
+	@include medium {
+		min-height: 500px;
+	}
+
+	@include small {
+		min-height: 300px;
+	}
+
+	@include xsmall {
+		min-height: 250px;
+	}
+}
+
+//Hover Block
+.hover-block {
+	@include flexbox();
+	@include flex-wrap(wrap);
+
+	.block {
+
+		a {
+            border: 1px solid #fff;
+
+			&:hover {
+				border-color: $primary-color;
+
+				span {
+					opacity: 1;
+                }
+            }
+
+            figure {
+                position: relative;
+                
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: none;
+                    transition: all .3s linear;
+                }
+                &:hover:before { 
+                    background: transparentize($color: $white-color, $amount: 0.1); 
+                }
+            }
+		}
+
+		span {
+			@include vertical-center;
+			opacity: 0;
+		}
+	}
+}
+
+//Form
+form {
+    @include flexbox();
+    input {
+        outline: none;
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        height: 40px;
+    }
+}
+
+//Footer
+footer {
+    border-top: 1px solid $divider-color;
+    border-bottom: 1px solid $divider-color;
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    .links {
+        @include flexbox;
+
+        div {
+            @include flexbox;
+            @include flex-direction(column);
+        }
+    }
+}
+
+//Copyright
+.copyright {
+    background-color: $light-color;
+    @include flexbox();
+    @include justify-content(space-between);
+
+    @include small {
+        @include flex-direction(column);
+    }
+}
